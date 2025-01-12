@@ -2,21 +2,21 @@ div(class="flex flex-col justify-center w-full py-5 px-4 lg:px-0  max-w-[90rem] 
     div(class="flex  flex-wrap justify-between")
         h3(class="text-center text-xl font-semibold") Latest Users
         a(href="/accounts" class="cursor-pointer text-blue-600") View All
-    table.bg-gray-900.w-full.mt-2.rounded-lg.text-gray-400
+    table(class="dark:bg-gray-900 w-full mt-2 rounded-lg text-gray-900")
         thead
-            tr(class="rounded-s-xl bg-gray-600 m-4")
-              th.text-left.px-4.py-2.text-white Name
-              th.text-left.px-4.py-2.text-white Role
-              th.text-left.px-4.py-2.text-white Status
-              th.text-left.px-4.py-2.text-white 
+            tr(class="rounded-s-xl dark:bg-gray-600 m-4")
+              th(class=" text-left px-4 py-2 dark:text-white") Name
+              th(class=" text-left px-4 py-2 dark:text-white") Role
+              th(class=" text-left px-4 py-2 dark:text-white") Status
+              th(class=" text-left px-4 py-2 dark:text-white") 
         tbody
             - var users = [{ name: 'Tony Reichert', role: 'CEO Management', status: 'Active' },{ name: 'Zoey Lang', role: 'Technical Lead Development', status: 'Paused' },{ name: 'Jane Fisher', role: 'Senior Developer Development', status: 'Active' },{ name: 'William Howard', role: 'Community Manager Marketing', status: 'Vacation' }]
               each user in users
                 tr
-                  td.px-4.py-2.text-white.flex.items-center
+                  td(class=" px-4 py-2 dark:text-white flex items-center")
                     img.w-10.h-10.rounded-full.mr-2(src="https://i.pravatar.cc/150?u=a04258114e29026702d", alt="user")
                     | #{user.name}
-                  td.px-4.py-2.text-white #{user.role}
+                  td(class="px-4 py-2 dark:text-white") #{user.role}
                   td.px-4.py-2
                     span(class=(user.status === 'Active' ? 'text-green-500' : user.status === 'Paused' ? 'text-red-500' : 'text-yellow-500') class="text-xs") #{user.status}
                   td.px-4.py-2.flex.gap-2

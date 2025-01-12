@@ -7,11 +7,11 @@ mixin transaction(name, amount, date, image)
       span.text-sm.text-green-400= amount + " USD"
     span.text-sm.text-gray-400= date
 
-.bg-gray-900.rounded-lg.p-6.w-full
+div(class="dark:bg-gray-900 rounded-lg p-6 w-full shadow-md")
   div(class="flex gap-2.5 justify-center")
     div(class="flex flex-col border-gray-500 border-dashed border-2 border-divider py-2 px-6 rounded-xl") 
       span.text-default-900.text-xl.font-semibold Latest Transactions
-  .overflow-y-auto(style="max-height: 250px;")
+  div(class="overflow-y-hidden h-fit")
     +transaction("Jose Perez", "4500", "9/20/2021", "https://i.pravatar.cc/150?img=1")
     +transaction("Jose Perez", "4500", "9/20/2021", "https://i.pravatar.cc/150?img=2")
     +transaction("Jose Perez", "4500", "9/20/2021", "https://i.pravatar.cc/150?img=3")

@@ -1,0 +1,147 @@
+doctype html
+html
+  head
+    title Dashboard
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css")
+    script(src="https://cdn.jsdelivr.net/npm/apexcharts")
+    style.
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+      html,body {
+        padding: 0;
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background-color: black;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      @media all and (max-width: 768px){
+        aside,.nav-input,.item {
+          display: none;
+        }
+        .nav-input{
+          width: 100%;
+        }
+        .menu{
+          display: block;
+        }
+      }
+      
+  body.text-white.flex
+    // Sidebar
+    
+    include includes/sidebar
+    // Main Content
+    main.w-full.m-3.mr-4.ml-4
+      // Top Bar
+      
+      include includes/navbar
+      div(class="flex justify-center gap-4 xl:gap-6 pt-3 px-4 lg:px-0  flex-wrap xl:flex-nowrap sm:pt-10 max-w-[90rem] mx-auto w-full")
+        // Available Balance Section
+        div(class="mt-6 gap-6 flex flex-col w-full")
+          div(class="flex flex-col gap-2")
+            h2(class="text-xl font-bold") Available Balance
+            div(class="grid md:grid-cols-2 grid-cols-1 2xl:grid-cols-3 gap-5  justify-center w-full")
+              include includes/card1
+              include includes/card2
+              include includes/card3
+          // Statistics Section
+          div(class="h-full flex flex-col gap-2")
+            include includes/chart
+        div(class="mt-4 gap-2 flex flex-col xl:max-w-md w-full")
+          div(class="flex flex-col justify-center gap-4 flex-wrap md:flex-nowrap md:flex-col")
+            h2(class="text-xl font-bold") Section
+            //Agents
+            include includes/agents
+            // transaction
+            include includes/tr
+      // Latest Users Section
+      include includes/latestUser
+
+    script.
+      var options = {
+        chart: {
+          height: 425,
+          type: "area",
+          animations: {
+            easing: "linear",
+            speed: 300,
+          },
+          sparkline: {
+            enabled: false,
+          },
+          brush: {
+            enabled: false,
+          },
+          id: "basic-bar",
+          foreColor: "#f4f4f5",
+          stacked: true,
+          toolbar: {
+            show: false,
+          },
+      },
+
+      xaxis: {
+        categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999],
+        labels: {
+          // show: false,
+          style: {
+            colors: "#f4f4f5",
+          },
+        },
+        axisBorder: {
+          color: "#3f3f46",
+        },
+        axisTicks: {
+          color: "#3f3f46",
+        },
+      },
+      yaxis: {
+        categories: [200, 160, 120, 80, 40, 0],
+        labels: {
+          style: {
+            // hsl(var(--nextui-content1-foreground))
+            colors: "#f4f4f5",
+          },
+        },
+      },
+      tooltip: {
+        enabled: false,
+      },
+      grid: {
+        show: true,
+        borderColor: "#f1f1f1",
+        strokeDashArray: 0,
+        position: "back",
+      },
+      stroke: {
+        curve: "smooth",
+        fill: {
+          colors: ["red"],
+        },
+      },
+      // @ts-ignore
+      markers: false,
+      series: [
+          { name: 'Series1', data: [31, 40, 28, 51, 42, 109, 100] },
+          { name: 'Series2', data: [11, 32, 45, 32, 34, 52, 41] }
+        ]
+      };
+      var chart = new ApexCharts(document.querySelector("#chart"), options);
+      chart.render();
+      //toggle navbar
+      //- let menu = document.querySelector('#ham-menu')
+      //- menu.addEventListener("click",function(e){
+      //-   var sidebar=document.querySelector('#sidebar');
+      //-   if(sidebar.style.display!=='none')
+      //-     sidebar.style.display='none';
+      //-   else
+      //-     sidebar.style.display='block';
+      //- } )
+
+      function Openbar() {
+        document.querySelector('.sidebar').classList.toggle('left-[-600px]')
+      }
+      
+      

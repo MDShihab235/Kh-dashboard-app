@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+      html,body {
+        padding: 0;
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background-color: black;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      @media all and (max-width: 768px){
+        aside,.nav-input,.item {
+          display: none;
+        }
+        .nav-input{
+          width: 100%;
+        }
+        .menu{
+          display: block;
+        }
+      }
+      
+    </style>
+  </head>
+  <body class="text-white flex">
+    <!-- Sidebar-->
+    <aside class="w-1/4 h-screen sticky p-6 z-[20] overflow-y-scroll top-0 sidebar">
+      <div class="flex items-center gap-2 justify-center"> 
+        <div class="flex items-center gap-4 justify-center rounded" style="border:1px solid #1e1e1e"> <img src="icons/acme-icon.svg" alt="acme-icon"></div>
+        <h3 class="text-xl font-medium ml-0 text-default-900 whitespace-nowrap">Acme Co.
+          <p class="text-gray-400 text-sm text-center ml-0">Palo Alto, CA</p>
+        </h3>
+      </div>
+      <nav class="mt-10">
+        <ul class="space-y-2">
+          <li class="flex items-center pt-3 pb-3 hover:bg-[rgb(15_23_42/0.3)]"><img src="icons/sidebar/home-icon.svg" alt="home"><a class="block py-2 px-4" href="#">Home</a></li>
+          <li class="text-xs font-normal"> Main Menu</li>
+          <li class="flex items-center"><img src="icons/sidebar/accounts-icon.svg" alt="accounts"><a class="block py-2 px-4 hover:bg-gray-700" href="#">Accounts</a></li>
+          <li class="flex items-center"><img src="icons/sidebar/payments-icon.svg" alt="payments"><a class="block py-2 px-4 hover:bg-gray-700" href="#">Payments</a></li>
+          <li class="flex items-center"><img src="icons/sidebar/balance-icon.svg" alt="balances"><a class="block py-2 px-4 hover:bg-gray-700" href="#">Balances</a></li>
+          <li class="flex items-center"><img src="icons/sidebar/customers-icon.svg" alt="customers"><a class="block py-2 px-4 hover:bg-gray-700" href="#">Customers</a></li>
+          <li class="flex items-center"><img src="icons/sidebar/products-icon.svg" alt="products"><a class="block py-2 px-4 hover:bg-gray-700" href="#">Products</a></li>
+          <li class="flex items-center"><img src="icons/sidebar/reports-icon.svg" alt="reports"><a class="block py-2 px-4 hover:bg-gray-700" href="#">Reports</a></li>
+          <li class="text-xs font-normal"> General</li>
+          <li class="flex items-center"><img src="icons/sidebar/dev-icon.svg" alt="developers"><a class="block py-2 px-4 hover:bg-gray-700" href="#">Developers</a></li>
+          <li class="flex items-center"><img src="icons/sidebar/view-icon.svg" alt="data"><a class="block py-2 px-4 hover:bg-gray-700" href="#">View Test Data</a></li>
+          <li class="flex items-center"><img src="icons/sidebar/settings-icon.svg" alt="settings"><a class="block py-2 px-4 hover:bg-gray-700" href="#">Settings</a></li>
+          <li class="text-xs font-normal"> Updates</li>
+          <li class="flex items-center"><img src="icons/sidebar/changelog-icon.svg" alt="changelog"><a class="block py-2 px-4 hover:bg-gray-700" href="#">Changelog</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <!-- Main Content-->
+    <main class="w-full m-3 mr-4 ml-4">
+      <!-- Top Bar-->
+      <nav class=" text-white flex items-center p-4 justify-between gap-4" id="nav">
+        <div class="hidden menu cursor-pointer" onclick="Openbar()" id="ham-menu"><img src="../icons/burger-menu.svg" alt="menu"></div>
+        <div class="relative nav-input w-full">
+          <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"><img class="p-2" src="../icons/search.png" width="36" height="36" alt="search"></div>
+          <input class="bg-blue-950 text-sm rounded-lg block w-full ps-10 p-2.5 pl-8" type="text" id="input-group-1" style="background-color: #3F3F46" placeholder="Search...">
+        </div>
+        <div class="flex items-center space-x-2 justify-between w-6/12"><img class="item" src="../icons/navbar/feedback-icon.svg" alt="feedback"><span class="item">Feedback?</span><img src="../icons/navbar/notification.png" alt="notify"><img class="item" src="../icons/navbar/support-icon.svg" alt="support"><img src="../icons/navbar/github.png" alt="github">
+          <div class="w-10 h-10 rounded-full overflow-hidden"><img class="w-full h-full object-cover" src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Profile"></div>
+        </div>
+      </nav>
+      <div class="flex justify-center gap-4 xl:gap-6 pt-3 px-4 lg:px-0  flex-wrap xl:flex-nowrap sm:pt-10 max-w-[90rem] mx-auto w-full">
+        <!-- Available Balance Section-->
+        <div class="mt-6 gap-6 flex flex-col w-full">
+          <div class="flex flex-col gap-2">
+            <h2 class="text-xl font-bold">Available Balance</h2>
+            <div class="grid md:grid-cols-2 grid-cols-1 2xl:grid-cols-3 gap-5  justify-center w-full">
+              <div class="xl:max-w-sm bg-blue-600 rounded-xl shadow-md px-3 w-full"> 
+                <div class="py-5 overflow-hidden">
+                  <div class="flex gap-2.5"><img src="../icons/community.svg" alt="community">
+                    <div class="flex flex-col"><span class="text-white">Auto Insurance</span><span class="text-white text-xs">1311 Cars        </span></div>
+                  </div>
+                  <div class="flex gap-2.5 py-2 items-center"><span class="text-white text-xl font-semibold">$45,910</span><span class="text-success text-xs">+ 4.5%</span></div>
+                  <div class="flex items-center gap-6">
+                    <div>
+                      <div><span class="font-semibold text-green-500 text-xs">↓</span><span class="text-xs text-white">100,930</span></div><span class="text-white text-xs">USD</span>
+                    </div>
+                    <div>
+                      <div><span class="font-semibold text-red-600 text-xs">↑</span><span class="text-xs text-white">54,120</span></div><span class="text-white text-xs">USD</span>
+                    </div>
+                    <div>
+                      <div><span class="font-semibold text-danger text-xs">⭐</span><span class="text-xs text-white">125</span></div><span class="text-white text-xs">VIP</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="xl:max-w-sm bg-gray-600 rounded-xl shadow-md px-3 w-full"> 
+                <div class="py-5 overflow-hidden">
+                  <div class="flex gap-2.5"><img src="../icons/community.svg" alt="community">
+                    <div class="flex flex-col"><span class="text-white">Auto Insurance</span><span class="text-white text-xs">1311 Cars        </span></div>
+                  </div>
+                  <div class="flex gap-2.5 py-2 items-center"><span class="text-white text-xl font-semibold">$45,910</span><span class="text-success text-xs">+ 4.5%</span></div>
+                  <div class="flex items-center gap-6">
+                    <div>
+                      <div><span class="font-semibold text-green-500 text-xs">↓</span><span class="text-xs text-white">100,930</span></div><span class="text-white text-xs">USD</span>
+                    </div>
+                    <div>
+                      <div><span class="font-semibold text-red-600 text-xs">↑</span><span class="text-xs text-white">54,120</span></div><span class="text-white text-xs">USD</span>
+                    </div>
+                    <div>
+                      <div><span class="font-semibold text-danger text-xs">⭐</span><span class="text-xs text-white">125</span></div><span class="text-white text-xs">VIP</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="xl:max-w-sm bg-green-600 rounded-xl shadow-md px-3 w-full"> 
+                <div class="py-5 overflow-hidden">
+                  <div class="flex gap-2.5"><img src="../icons/community.svg" alt="community">
+                    <div class="flex flex-col"><span class="text-white">Auto Insurance</span><span class="text-white text-xs">1311 Cars        </span></div>
+                  </div>
+                  <div class="flex gap-2.5 py-2 items-center"><span class="text-white text-xl font-semibold">$45,910</span><span class="text-success text-xs">+ 4.5%</span></div>
+                  <div class="flex items-center gap-6">
+                    <div>
+                      <div><span class="font-semibold text-green-500 text-xs">↓</span><span class="text-xs text-white">100,930</span></div><span class="text-white text-xs">USD</span>
+                    </div>
+                    <div>
+                      <div><span class="font-semibold text-red-600 text-xs">↑</span><span class="text-xs text-white">54,120</span></div><span class="text-white text-xs">USD</span>
+                    </div>
+                    <div>
+                      <div><span class="font-semibold text-danger text-xs">⭐</span><span class="text-xs text-white">125</span></div><span class="text-white text-xs">VIP</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Statistics Section-->
+          <div class="h-full flex flex-col gap-2">
+            <h2 class="text-xl font-bold">Statistics</h2>
+            <div class="bg-gray-800 p-6 rounded-lg mt-4" id="chart"></div>
+          </div>
+        </div>
+        <div class="mt-4 gap-2 flex flex-col xl:max-w-md w-full">
+          <div class="flex flex-col justify-center gap-4 flex-wrap md:flex-nowrap md:flex-col">
+            <h2 class="text-xl font-bold">Section</h2>
+            <!--Agents-->
+            <div class="bg-gray-900 rounded-lg p-6 text-center">
+              <div class="border-b border-gray-700 pb-4 mb-4">
+                <div class="inline-block px-4 py-2 border-dashed border-2 border-divider border-gray-500 rounded-lg"><span class="text-default-900 mr-1 font-semibold">⭐</span><span class="text-default-900 text-xl font-semibold">Agents</span></div>
+              </div>
+              <p class="text-xs mb-6">Meet your agenda and see their ranks to get the best results</p>
+              <div class="flex justify-center">
+                <div class="relative"><img class="w-12 h-12 rounded-full border-2 border-gray-600" src="https://i.pravatar.cc/150?u=a042581f4e29026024d" alt="Agent 1"></div>
+                <div class="relative -ml-4"><img class="w-12 h-12 rounded-full border-2 border-gray-600" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" alt="Agent 2"></div>
+                <div class="relative -ml-4"><img class="w-12 h-12 rounded-full border-2 border-gray-600" src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Agent 3"></div>
+                <div class="relative -ml-4"><img class="w-12 h-12 rounded-full border-2 border-gray-600" src="https://i.pravatar.cc/150?u=a04258114e29026302d" alt="Agent 4"></div>
+                <div class="relative -ml-4"><img class="w-12 h-12 rounded-full border-2 border-gray-600" src="https://i.pravatar.cc/150?u=a04258114e29026702d" alt="Agent 5"></div>
+                <div class="relative -ml-4 bg-gray-700 w-12 h-12 rounded-full border-2 border-gray-600 flex items-center justify-center"><span class="text-gray-400">+1</span></div>
+              </div>
+            </div>
+            <!-- transaction-->
+            <div class="bg-gray-900 rounded-lg p-6 w-full">
+              <div class="flex gap-2.5 justify-center">
+                <div class="flex flex-col border-gray-500 border-dashed border-2 border-divider py-2 px-6 rounded-xl"> <span class="text-default-900 text-xl font-semibold">Latest Transactions</span></div>
+              </div>
+              <div class="overflow-y-auto" style="max-height: 250px;">
+                            <div class="flex items-center py-3"><img class="w-10 h-10 rounded-full mr-3 border-2 border-purple-500" src="https://i.pravatar.cc/150?img=1" alt="Jose Perez">
+                              <div class="flex-grow"><span class="font-medium mr-1">Jose Perez</span><span class="text-sm text-green-400">4500 USD</span></div><span class="text-sm text-gray-400">9/20/2021</span>
+                            </div>
+                            <div class="flex items-center py-3"><img class="w-10 h-10 rounded-full mr-3 border-2 border-purple-500" src="https://i.pravatar.cc/150?img=2" alt="Jose Perez">
+                              <div class="flex-grow"><span class="font-medium mr-1">Jose Perez</span><span class="text-sm text-green-400">4500 USD</span></div><span class="text-sm text-gray-400">9/20/2021</span>
+                            </div>
+                            <div class="flex items-center py-3"><img class="w-10 h-10 rounded-full mr-3 border-2 border-purple-500" src="https://i.pravatar.cc/150?img=3" alt="Jose Perez">
+                              <div class="flex-grow"><span class="font-medium mr-1">Jose Perez</span><span class="text-sm text-green-400">4500 USD</span></div><span class="text-sm text-gray-400">9/20/2021</span>
+                            </div>
+                            <div class="flex items-center py-3"><img class="w-10 h-10 rounded-full mr-3 border-2 border-purple-500" src="https://i.pravatar.cc/150?img=4" alt="Jose Perez">
+                              <div class="flex-grow"><span class="font-medium mr-1">Jose Perez</span><span class="text-sm text-green-400">4500 USD</span></div><span class="text-sm text-gray-400">9/20/2021</span>
+                            </div>
+                            <div class="flex items-center py-3"><img class="w-10 h-10 rounded-full mr-3 border-2 border-purple-500" src="https://i.pravatar.cc/150?img=5" alt="Jose Perez">
+                              <div class="flex-grow"><span class="font-medium mr-1">Jose Perez</span><span class="text-sm text-green-400">4500 USD</span></div><span class="text-sm text-gray-400">9/20/2021</span>
+                            </div>
+                            <div class="flex items-center py-3"><img class="w-10 h-10 rounded-full mr-3 border-2 border-purple-500" src="https://i.pravatar.cc/150?img=5" alt="Jose Perez">
+                              <div class="flex-grow"><span class="font-medium mr-1">Jose Perez</span><span class="text-sm text-green-400">4500 USD</span></div><span class="text-sm text-gray-400">9/20/2021</span>
+                            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Latest Users Section-->
+      <div class="flex flex-col justify-center w-full py-5 px-4 lg:px-0  max-w-[90rem] mx-auto gap-3">
+        <div class="flex  flex-wrap justify-between">
+          <h3 class="text-center text-xl font-semibold">Latest Users</h3><a class="cursor-pointer text-blue-600" href="/accounts">View All</a>
+        </div>
+        <table class="bg-gray-900 w-full mt-2 rounded-lg text-gray-400">
+          <thead>
+            <tr class="rounded-s-xl bg-gray-600 m-4">
+              <th class="text-left px-4 py-2 text-white">Name</th>
+              <th class="text-left px-4 py-2 text-white">Role</th>
+              <th class="text-left px-4 py-2 text-white">Status</th>
+              <th class="text-left px-4 py-2 text-white"> </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="px-4 py-2 text-white flex items-center"><img class="w-10 h-10 rounded-full mr-2" src="https://i.pravatar.cc/150?u=a04258114e29026702d" alt="user">Tony Reichert</td>
+              <td class="px-4 py-2 text-white">CEO Management</td>
+              <td class="px-4 py-2"><span class="text-green-500 text-xs">Active</span></td>
+              <td class="px-4 py-2 flex gap-2">
+                <div class="p-2 rounded-lg flex items-center"><img src="../icons/table/eye.png" width="20" height="20" alt="see"></div>
+                <div class="p-2 rounded-lg flex items-center"><img src="../icons/table/edit.png" width="20" height="20" alt="edit"></div>
+                <div class="p-2 rounded-lg flex items-center"><img src="../icons/table/delete.png" width="20" height="20" alt="delete"></div>
+              </td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2 text-white flex items-center"><img class="w-10 h-10 rounded-full mr-2" src="https://i.pravatar.cc/150?u=a04258114e29026702d" alt="user">Zoey Lang</td>
+              <td class="px-4 py-2 text-white">Technical Lead Development</td>
+              <td class="px-4 py-2"><span class="text-red-500 text-xs">Paused</span></td>
+              <td class="px-4 py-2 flex gap-2">
+                <div class="p-2 rounded-lg flex items-center"><img src="../icons/table/eye.png" width="20" height="20" alt="see"></div>
+                <div class="p-2 rounded-lg flex items-center"><img src="../icons/table/edit.png" width="20" height="20" alt="edit"></div>
+                <div class="p-2 rounded-lg flex items-center"><img src="../icons/table/delete.png" width="20" height="20" alt="delete"></div>
+              </td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2 text-white flex items-center"><img class="w-10 h-10 rounded-full mr-2" src="https://i.pravatar.cc/150?u=a04258114e29026702d" alt="user">Jane Fisher</td>
+              <td class="px-4 py-2 text-white">Senior Developer Development</td>
+              <td class="px-4 py-2"><span class="text-green-500 text-xs">Active</span></td>
+              <td class="px-4 py-2 flex gap-2">
+                <div class="p-2 rounded-lg flex items-center"><img src="../icons/table/eye.png" width="20" height="20" alt="see"></div>
+                <div class="p-2 rounded-lg flex items-center"><img src="../icons/table/edit.png" width="20" height="20" alt="edit"></div>
+                <div class="p-2 rounded-lg flex items-center"><img src="../icons/table/delete.png" width="20" height="20" alt="delete"></div>
+              </td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2 text-white flex items-center"><img class="w-10 h-10 rounded-full mr-2" src="https://i.pravatar.cc/150?u=a04258114e29026702d" alt="user">William Howard</td>
+              <td class="px-4 py-2 text-white">Community Manager Marketing</td>
+              <td class="px-4 py-2"><span class="text-yellow-500 text-xs">Vacation</span></td>
+              <td class="px-4 py-2 flex gap-2">
+                <div class="p-2 rounded-lg flex items-center"><img src="../icons/table/eye.png" width="20" height="20" alt="see"></div>
+                <div class="p-2 rounded-lg flex items-center"><img src="../icons/table/edit.png" width="20" height="20" alt="edit"></div>
+                <div class="p-2 rounded-lg flex items-center"><img src="../icons/table/delete.png" width="20" height="20" alt="delete"></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+    <script>
+      var options = {
+        chart: {
+          height: 425,
+          type: "area",
+          animations: {
+            easing: "linear",
+            speed: 300,
+          },
+          sparkline: {
+            enabled: false,
+          },
+          brush: {
+            enabled: false,
+          },
+          id: "basic-bar",
+          foreColor: "#f4f4f5",
+          stacked: true,
+          toolbar: {
+            show: false,
+          },
+      },
+      
+      xaxis: {
+        categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999],
+        labels: {
+          // show: false,
+          style: {
+            colors: "#f4f4f5",
+          },
+        },
+        axisBorder: {
+          color: "#3f3f46",
+        },
+        axisTicks: {
+          color: "#3f3f46",
+        },
+      },
+      yaxis: {
+        categories: [200, 160, 120, 80, 40, 0],
+        labels: {
+          style: {
+            // hsl(var(--nextui-content1-foreground))
+            colors: "#f4f4f5",
+          },
+        },
+      },
+      tooltip: {
+        enabled: false,
+      },
+      grid: {
+        show: true,
+        borderColor: "#f1f1f1",
+        strokeDashArray: 0,
+        position: "back",
+      },
+      stroke: {
+        curve: "smooth",
+        fill: {
+          colors: ["red"],
+        },
+      },
+      // @ts-ignore
+      markers: false,
+      series: [
+          { name: 'Series1', data: [31, 40, 28, 51, 42, 109, 100] },
+          { name: 'Series2', data: [11, 32, 45, 32, 34, 52, 41] }
+        ]
+      };
+      var chart = new ApexCharts(document.querySelector("#chart"), options);
+      chart.render();
+      //toggle navbar
+      //- let menu = document.querySelector('#ham-menu')
+      //- menu.addEventListener("click",function(e){
+      //-   var sidebar=document.querySelector('#sidebar');
+      //-   if(sidebar.style.display!=='none')
+      //-     sidebar.style.display='none';
+      //-   else
+      //-     sidebar.style.display='block';
+      //- } )
+      
+      function Openbar() {
+        document.querySelector('.sidebar').classList.toggle('left-[-600px]')
+      }
+    </script>
+  </body>
+</html>

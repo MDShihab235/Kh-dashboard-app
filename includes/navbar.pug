@@ -1,0 +1,16 @@
+nav(class=" text-white flex items-center p-4 justify-between gap-4" id="nav")
+    div(class="hidden menu cursor-pointer" onclick="Openbar()" id="ham-menu")
+        img(src="../icons/burger-menu.svg" alt="menu")
+    div(class="relative nav-input w-full")
+        div(class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none")
+            img(src="../icons/search.png" width=36 height=36 class="p-2" alt="search")
+        input(type="text" id="input-group-1" class="bg-blue-950 text-sm rounded-lg block w-full ps-10 p-2.5 pl-8" style="background-color: #3F3F46" placeholder="Search...")
+
+    div(class="flex items-center space-x-2 justify-between w-6/12")
+        img(src="../icons/navbar/feedback-icon.svg" class="item" alt="feedback")
+        span.item Feedback?
+        img(src="../icons/navbar/notification.png" alt="notify")
+        img(src="../icons/navbar/support-icon.svg" class="item"  alt="support")
+        img(src="../icons/navbar/github.png"  alt="github")
+        div.w-10.h-10.rounded-full.overflow-hidden
+            img(src='https://i.pravatar.cc/150?u=a042581f4e29026704d' alt="Profile" class="w-full h-full object-cover")

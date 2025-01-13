@@ -40,7 +40,7 @@
           width: 100%;
         }
         .menu{
-          display: block;
+          display:  block !important;
         }
       }
       
@@ -72,13 +72,18 @@
           <li class="text-xs font-normal"> Updates</li>
           <li class="flex items-center"><img src="icons/sidebar/changelog-icon.svg" alt="changelog"><a class="block py-2 px-4 hover:bg-gray-700" href="#">Changelog</a></li>
         </ul>
+        <div class="flex items-center justify-center gap-6 pt-16 pb-8 px-8 md:pt-10 md:pb-0">
+          <div class="max-w-fit"><img src="../icons/sidebar/settings-icon.svg" width="30" height="30" alt="settings"></div>
+          <div class="max-w-fit"><img src="../icons/sidebar/filter-icon.svg" width="30" height="30" alt="filter"></div>
+          <div class="w-10 h-10 rounded-full overflow-hidden cursor-pointer"><img class=" w-10 h-10 h-full object-cover" src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Profile"></div>
+        </div>
       </nav>
     </aside>
     <!-- Main Content-->
     <main class="w-full m-3 mr-4 ml-4">
       <!-- Top Bar-->
       <nav class=" dark:text-white flex items-center p-4 justify-between gap-4" id="nav">
-        <div class="hidden menu cursor-pointer" id="ham-menu"><img src="../icons/burger-menu.svg" alt="menu"></div>
+        <div class="hidden menu cursor-pointer" id="ham-menu" onclick="openSidebar()"><img src="../icons/burger-menu.svg" alt="menu"></div>
         <div class="relative nav-input w-full">
           <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"><img src="../icons/search.png" width="20" height="20" alt="search"></div>
           <input class="dark:bg-gray-900 bg-gray-100 text-sm rounded-lg block w-full ps-10 p-2.5 pl-8 focus:outline-none" type="text" id="input-group-1" placeholder="Search...">
@@ -353,15 +358,19 @@
       };
       var chart = new ApexCharts(document.querySelector("#chart"), options);
       chart.render();
-      //toggle navbar
-      let menu = document.querySelector('#ham-menu')
-      menu.addEventListener("click",function(){
-        var sidebar = document.querySelector('.sidebar');
-        if(sidebar.style.display!=='none')
-          sidebar.style.display='none';
-        else
-          sidebar.style.display='block';
-      })
+      //toggle sidebar
+      //- let menu = document.querySelector('#ham-menu')
+      //- menu.addEventListener("click",function(){
+      //-   var sidebar = document.querySelectorAll('.sidebar');
+      //-   if(sidebar.style.display!=='none')
+      //-     sidebar.style.display='none';
+      //-   else
+      //-     sidebar.style.display='block';
+      //- })
+      
+      function openSidebar() {
+        document.querySelector(".sidebar").classList.toggle("hidden");
+      }
       
       let user = document.querySelector(".user")
       user.addEventListener("click",function(){

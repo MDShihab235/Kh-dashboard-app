@@ -42,13 +42,32 @@
         .menu{
           display:  block !important;
         }
+        .sidebar{
+          position: absolute !important;
+          overflow-x: hidden !important;
+          width: 300px !important;
+          height: 100% !important;
+        }
+        .navbar{
+          z-index: 999 !important;
+          position: fixed !important;
+          width: 100%;
+          top: 0;
+          left: 0;
+        }
+        .line{
+          position: fixed !important;
+          top: 80px !important;
+          left: 0;
+        }
+        
       }
       
     </style>
   </head>
   <body class="dark:text-white flex dark:bg-black ">
     <!-- Sidebar-->
-    <aside class="w-1/4 h-screen sticky p-6 z-[20] overflow-y-scroll top-0 sidebar">
+    <aside class="dark:bg-black w-1/4 h-screen sticky p-6 z-[20] overflow-y-scroll top-0 max-md:top-16 sidebar" id="sidebar">
       <div class="flex items-center gap-2 justify-center"> 
         <div class="flex items-center gap-4 justify-center rounded" style="border:1px solid #1e1e1e"> <img src="icons/acme-icon.svg" alt="acme-icon"></div>
         <h3 class="text-xl font-medium ml-0 text-default-900 whitespace-nowrap">Acme Co.
@@ -80,10 +99,10 @@
       </nav>
     </aside>
     <!-- Main Content-->
-    <main class="w-full m-3 mr-4 ml-4">
+    <main class="w-screen m-3 mr-4 ml-4">
       <!-- Top Bar-->
-      <nav class=" dark:text-white flex items-center p-4 justify-between gap-4" id="nav">
-        <div class="hidden menu cursor-pointer" id="ham-menu" onclick="openSidebar()"><img src="../icons/burger-menu.svg" alt="menu"></div>
+      <nav class="dark:text-white max-md:bg-black flex items-center p-5 justify-between gap-4 navbar" id="nav">
+        <button class="hidden menu cursor-pointer" id="ham-menu"><img src="../icons/burger-menu.svg" alt="menu"></button>
         <div class="relative nav-input w-full">
           <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"><img src="../icons/search.png" width="20" height="20" alt="search"></div>
           <input class="dark:bg-gray-900 bg-gray-100 text-sm rounded-lg block w-full ps-10 p-2.5 pl-8 focus:outline-none" type="text" id="input-group-1" placeholder="Search...">
@@ -109,8 +128,8 @@
           </div>
         </div>
       </nav>
-      <div class="border-b border-gray-600 w-full"></div>
-      <div class="flex justify-center gap-4 xl:gap-6 pt-3 px-4 lg:px-0  flex-wrap xl:flex-nowrap sm:pt-10 max-w-[90rem] mx-auto w-full">
+      <div class="border-b border-gray-600 w-full line"></div>
+      <div class=" main-content flex justify-center gap-4 xl:gap-6 pt-3 px-4 lg:px-0  flex-wrap xl:flex-nowrap sm:pt-10 max-w-[90rem] mx-auto w-full">
         <!-- Available Balance Section-->
         <div class="mt-6 gap-6 flex flex-col w-full">
           <div class="flex flex-col gap-2">
@@ -229,7 +248,7 @@
         </div>
       </div>
       <!-- Latest Users Section-->
-      <div class="flex flex-col justify-center w-full py-5 px-4 lg:px-0  max-w-[90rem] mx-auto gap-3">
+      <div class="flex flex-col justify-center w-full py-5 px-4 lg:px-0 max-w-[90rem] mx-auto gap-3">
         <div class="flex  flex-wrap justify-between">
           <h3 class="text-center text-xl font-semibold">Latest Users</h3><a class="cursor-pointer text-blue-600" href="/accounts">View All</a>
         </div>
@@ -359,18 +378,15 @@
       var chart = new ApexCharts(document.querySelector("#chart"), options);
       chart.render();
       //toggle sidebar
-      //- let menu = document.querySelector('#ham-menu')
-      //- menu.addEventListener("click",function(){
-      //-   var sidebar = document.querySelectorAll('.sidebar');
-      //-   if(sidebar.style.display!=='none')
-      //-     sidebar.style.display='none';
-      //-   else
-      //-     sidebar.style.display='block';
-      //- })
+      let menu = document.querySelector('#ham-menu')
+      menu.addEventListener("click",function(){
+        var sidebar = document.querySelector('.sidebar');
       
-      function openSidebar() {
-        document.querySelector(".sidebar").classList.toggle("hidden");
-      }
+        if(sidebar.style.display==='none')
+          sidebar.style.display='block';
+        else
+          sidebar.style.display='none';
+      })
       
       let user = document.querySelector(".user")
       user.addEventListener("click",function(){
@@ -380,7 +396,7 @@
         else
           userDropdown.style.display='block';
       })
-      
+       
       //- theme dark/light
       var themeToggleDarkIcon = document.getElementById(
         "theme-toggle-dark-icon"
